@@ -42,12 +42,30 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));;
+            $user->setIsActive(false);
+            $random = random_bytes(10);
+            $token = md5($random);
+            $user->setToken($token);
+
+            $user->setFirstName(
+                $form->get('firstName')->getData()
+            );
+            $user->setLastName(
+                $form->get('lastName')->getData()
+            );
+            $user->setPhoneNumber(
+                $form->get('phoneNumber')->getData()
+            );
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('fanzy28@hotmail.fr', 'FanZy Mail Bot'))
                     ->to($user->getEmail())
