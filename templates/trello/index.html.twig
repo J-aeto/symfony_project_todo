@@ -48,10 +48,13 @@
           <li>Beginning date :
             {{ project.startAt | date("d-m-Y") }}</li>
           <li>Deadline :
-            {{ project.endAt | date("d-m-Y") }}</li>
+            {% if project.endAt %}
+              {{ project.endAt | date("d-m-Y à H:i") }}</li>
+          {% endif %}
 
         </ul>
       {% endfor %}
     </div>
   </div>
+  {{ knp_pagination_render(projects) }}
 {% endblock %}

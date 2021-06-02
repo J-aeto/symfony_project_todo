@@ -23,7 +23,9 @@
       <li>project start at :
         {{ project.startAt | date("d-m-Y à H:i") }}</li>
       <li>Project end at :
-        {{ project.endAt | date("d-m-Y à H:i") }}</li>
+        {% if project.endAt %}
+          {{ project.endAt | date("d-m-Y à H:i") }}</li>
+      {% endif %}
 
     </ul>
 </ul>

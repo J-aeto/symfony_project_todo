@@ -29,17 +29,20 @@
   </div>
   <div class="exemple-wrapper">
     <ul>
-      {% for project in projects %}
+      {% for project in app.user.projects %}
         <li>{{ project.title }}</li>
         <ul>
           <li>{{ project.description }}</li>
           <li>project start at :
             {{ project.startAt | date("d-m-Y à H:i") }}</li>
           <li>Project end at :
-            {{ project.endAt | date("d-m-Y à H:i") }}</li>
+            {% if project.endAt %}
+              {{ project.endAt | date("d-m-Y à H:i") }}</li>
+          {% endif %}
+        </li>
 
-        </ul>
-      {% endfor %}
-  </ul>
+      </ul>
+    {% endfor %}
+</ul>
 </div>
 {% endblock %}

@@ -2,23 +2,27 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/project/{id}", name="project")
+     * @Route("/project/view/{id}", name="project")
      */
     public function index(Project $project): Response
     {
         return $this->render('project/index.html.twig', [
             'controller_name' => 'ProjectController',
-            'project' => $project
+            'project' => $project,
         ]);
     }
     /**
@@ -34,7 +38,7 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-            $project->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));;
+            $project->setCreatedAt(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
             $project->setStatus(0);
 
             $project->setTitle(
@@ -75,4 +79,5 @@ class ProjectController extends AbstractController
             'controller_name' => 'ProjectController',
         ]);
     }
+    
 }
