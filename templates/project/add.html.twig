@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add project{% endblock %}
+
+{% block body %}
+  {% for flashError in app.flashes('verify_email_error') %}
+    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+  {% endfor %}
+
+  <h1>Add new project</h1>
+
+  {{ form_start(Project) }}
+  {{ form_row(Project.title) }}
+  {{ form_row(Project.description) }}
+  {{ form_row(Project.start_at) }}
+  {{ form_row(Project.end_at) }}
+  <button type="submit" class="btn">Ajouter</button>
+  {{ form_end(Project) }}
+{% endblock %}

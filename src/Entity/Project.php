@@ -59,6 +59,12 @@ class Project
      */
     private $end_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->user_id = new ArrayCollection();
@@ -173,6 +179,18 @@ class Project
     public function setEndAt(?\DateTimeInterface $end_at): self
     {
         $this->end_at = $end_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
