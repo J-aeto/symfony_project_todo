@@ -12,12 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/project", name="project")
+     * @Route("/project/{id}", name="project")
      */
-    public function index(): Response
+    public function index(Project $project): Response
     {
         return $this->render('project/index.html.twig', [
             'controller_name' => 'ProjectController',
+            'project' => $project
         ]);
     }
     /**
@@ -55,7 +56,7 @@ class ProjectController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->redirectToRoute('add_project');
+            return $this->redirectToRoute('profil');
         }
 
 
